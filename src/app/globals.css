@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1e293b;
+    background-color: #f7faf9;
+    overflow-x: hidden;
+  }
+}
+
+/* Seamless Islamic Geometric 3D Relief Tile Pattern */
+.bg-islamic-pattern {
+  background-color: #f6f9f8;
+  background-image: url('/islamic-pattern.svg');
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  background-attachment: fixed;
+}
+
+/* Subtle continuous overlay across entire viewport */
+.bg-islamic-pattern-seamless {
+  background-color: #f5f8f7;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(15, 122, 96, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(255, 111, 60, 0.03) 0%, transparent 50%),
+    url('/islamic-pattern.svg');
+  background-repeat: repeat;
+  background-size: auto, auto, 140px 140px;
+  background-attachment: scroll, scroll, fixed;
+}
+
+/* Brand Logo Teal Solid Color for Footer */
+.bg-footer-islamic {
+  background-color: #0F7A60;
+}
+
+/* Decorative 4-point star animation */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(4deg); }
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatSlow 6s ease-in-out 2s infinite;
+}
