@@ -1,12 +1,57 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { EDUCATIONAL_UNITS, UnitItem } from '../data/content';
-import { Baby, BookOpen, Building2, GraduationCap, ArrowRight } from 'lucide-react';
+import { fetchEducationalUnits, ContentApiItem } from '../services/unitService';
+import { Baby, BookOpen, Building2, GraduationCap, ArrowRight, Loader2 } from 'lucide-react';
 
 interface EducationalUnitsProps {
   onSelectUnit: (unit: UnitItem) => void;
 }
 
 export const EducationalUnits: React.FC<EducationalUnitsProps> = ({ onSelectUnit }) => {
+  const [units, setUnits] = useState<UnitItem[]>(EDUCATIONAL_UNITS);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const loadUnits = async () => {
+      setLoading(true);
+      const apiData = await fetchEducationalUnits();
+
+      if (apiData && apiData.length > 0) {
+        const mappedUnits: UnitItem[] = apiData.map((item: ContentApiItem, index: number) => {
+  const fallback = EDUCATIONAL_UNITS[index] || EDUCATIONAL_UNITS[0];
+
+  const id = String(item.ContentId || item.Id || item.id || fallback?.id || index);
+  const title = item.Title || item.Judul || item.title || fallback?.name || 'Unit';
+
+  const rawDescription = item.Content || item.Description || item.Deskripsi || item.Summary || fallback?.description || '';
+  const cleanDescription = rawDescription.replace(/<[^>]*>?/gm, '');
+
+  let image = item.SignedThumbnail || item.Thumbnail || item.ImageUrl || item.Gambar || item.image || fallback?.image || '';
+  if (image && !image.startsWith('http')) {
+    image = `http://localhost:7000/resources/asset/${image}`;
+  }
+
+  return {
+    id,
+    name: title,
+    description: cleanDescription,
+    image,
+    iconType: item.Category?.toLowerCase().includes('daycare') ? 'baby' : (fallback?.iconType || 'graduation'),
+    iconBg: fallback?.iconBg || '#0F7A60',
+    buttonBorder: fallback?.buttonBorder || 'border-[#0F7A60]',
+  } as UnitItem;
+});
+
+        setUnits(mappedUnits);
+      }
+      setLoading(false);
+    };
+
+    loadUnits();
+  }, []);
+
   const getUnitIcon = (iconType: string) => {
     switch (iconType) {
       case 'baby':
@@ -25,7 +70,6 @@ export const EducationalUnits: React.FC<EducationalUnitsProps> = ({ onSelectUnit
   return (
     <section id="units-section" className="py-14 px-4 sm:px-8 relative">
       <div className="max-w-7xl mx-auto">
-        {/* Section Heading Badge with stars */}
         <div className="flex items-center justify-center gap-3 mb-10">
           <span className="text-teal-400 text-xl select-none animate-float">✦</span>
           <div className="bg-white border-2 border-teal-100 px-8 py-2.5 rounded-full shadow-xs">
@@ -36,61 +80,66 @@ export const EducationalUnits: React.FC<EducationalUnitsProps> = ({ onSelectUnit
           <span className="text-amber-400 text-xl select-none animate-float-delayed">✦</span>
         </div>
 
-        {/* 4 Educational Unit Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {EDUCATIONAL_UNITS.map((unit) => (
-            <div
-              key={unit.id}
-              id={`unit-card-${unit.id}`}
-              className="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative"
-            >
-              {/* Image Container with overlapping circular badge */}
-              <div className="relative">
-                {/* Image itself is rounded at top and clips zoom */}
-                <div className="h-48 overflow-hidden rounded-t-2xl bg-slate-100">
-                  <img
-                    src={unit.image}
-                    alt={`Kegiatan santri di ${unit.name} Asih Putera`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                
-                {/* Floating Centered Circular Badge (Fully visible without clipping) */}
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
-                  <div
-                    className="w-12 h-12 rounded-full text-white flex items-center justify-center shadow-lg border-2 border-white transform transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: unit.iconBg }}
-                  >
-                    {getUnitIcon(unit.iconType)}
+        {loading ? (
+          <div className="flex justify-center items-center py-12 text-[#0F7A60] gap-2">
+            <Loader2 className="w-6 h-6 animate-spin" />
+            <span className="text-sm font-semibold">Memuat Unit Pendidikan...</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {units.map((unit) => (
+              <div
+                key={unit.id}
+                id={`unit-card-${unit.id}`}
+                className="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative"
+              >
+                <div className="relative">
+                  <div className="h-48 overflow-hidden rounded-t-2xl bg-slate-100">
+                    <img
+                      src={unit.image}
+                      alt={`Kegiatan santri di ${unit.name} Asih Putera`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src =
+                          'https://placehold.co/600x400/0F7A60/FFFFFF?text=Asih+Putera';
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+
+                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
+                    <div
+                      className="w-12 h-12 rounded-full text-white flex items-center justify-center shadow-lg border-2 border-white transform transition-transform group-hover:scale-110"
+                      style={{ backgroundColor: unit.iconBg }}
+                    >
+                      {getUnitIcon(unit.iconType)}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Card Body */}
-              <div className="p-6 pt-8 flex-1 flex flex-col text-center items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-extrabold text-[#0F7A60] mb-2">
-                    {unit.name}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-6">
-                    {unit.description}
-                  </p>
+                <div className="p-6 pt-8 flex-1 flex flex-col text-center items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-extrabold text-[#0F7A60] mb-2">
+                      {unit.name}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-6">
+                      {unit.description}
+                    </p>
+                  </div>
+
+                  <button
+                    id={`unit-btn-${unit.id}`}
+                    onClick={() => onSelectUnit(unit)}
+                    className={`w-full py-2.5 px-4 rounded-full border text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${unit.buttonBorder}`}
+                  >
+                    <span>Lihat Detail</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
-
-                {/* CTA Button */}
-                <button
-                  id={`unit-btn-${unit.id}`}
-                  onClick={() => onSelectUnit(unit)}
-                  className={`w-full py-2.5 px-4 rounded-full border text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${unit.buttonBorder}`}
-                >
-                  <span>Lihat Detail</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

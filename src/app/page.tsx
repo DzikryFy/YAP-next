@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import { loginService } from '../services/loginService';
 import { TopBar } from '../components/TopBar';
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -19,25 +19,6 @@ import { EDUCATIONAL_UNITS, UnitItem, NewsItem, CoreValueItem, FeatureItem } fro
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const handleTestLogin = async () => {
-      try {
-        const res = await loginService.login({
-          Username: 'yap@gmail.com',
-          Password: 'YAPhebat#1',
-          SiteId: '1005',
-        });
-        console.log('Login Berhasil:', res);
-        setIsLoggedIn(true);
-      } catch (err) {
-        console.error('Login Gagal:', err);
-      }
-    };
-
-    handleTestLogin();
-  }, []);
-
   const [ppdbOpen, setPpdbOpen] = useState(false);
   const [defaultPpdbUnit, setDefaultPpdbUnit] = useState('mi');
   const [visitOpen, setVisitOpen] = useState(false);
@@ -46,6 +27,26 @@ export default function Home() {
   const [selectedValue, setSelectedValue] = useState<CoreValueItem | null>(null);
   const [selectedFeature, setSelectedFeature] = useState<FeatureItem | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handleAutoLogin = async () => {
+      try {
+        // Tembak Route Handler Next.js
+        const response = await axios.post('/api/login');
+
+        // Cek status success dari response
+        if (response.data?.success) {
+          setIsLoggedIn(true); // Memicu render komponen NewsEvents
+        }
+      } catch (err) {
+        console.error('❌ Auto Login Gagal:', err);
+        // Tetap set true jika ingin mengizinkan halaman dimuat meski login gagal
+        setIsLoggedIn(true); 
+      }
+    };
+
+    handleAutoLogin();
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     let element: HTMLElement | null = null;

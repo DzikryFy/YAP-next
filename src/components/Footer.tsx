@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { 
   MapPin, 
   Phone, 
@@ -7,16 +9,34 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { LogoAsihPutera } from './LogoAsihPutera';
+import { fetchSiteInformation, SiteInfoData } from '../services/siteService';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
   onSelectUnit: (unitId: string) => void;
-  onOpenPPDB: () => void;
+  onOpenPPDB?: () => void;
 }
+
+// Helper untuk membersihkan tag HTML dari string API (misal: <ul><li>...)
+const stripHtml = (htmlString?: string) => {
+  if (!htmlString) return '';
+  return htmlString.replace(/<[^>]*>?/gm, '').trim();
+};
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [siteInfo, setSiteInfo] = useState<SiteInfoData | null>(null);
+
+  useEffect(() => {
+    const loadSiteInfo = async () => {
+      const data = await fetchSiteInformation();
+      if (data) {
+        setSiteInfo(data);
+      }
+    };
+    loadSiteInfo();
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +49,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
     }
   };
 
+  // Pemrosesan Data Kontak Dinamis dari API
+  const rawAddress = siteInfo?.Address || siteInfo?.Alamat;
+  const cleanAddress = stripHtml(rawAddress) || 'Jl. P. Cibabat No. 33, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40513';
+  const mapUrl = siteInfo?.UrlMap || `https://www.google.com/maps/search/${encodeURIComponent(cleanAddress)}`;
+
+  const phone = siteInfo?.Phone || siteInfo?.Telepon || '(022) 1234 5678';
+  const mail = siteInfo?.Email || 'info@asihputera.sch.id';
+  const siteName = siteInfo?.Name || 'Yayasan Asih Putera';
+  const facebookUrl = siteInfo?.Facebook || 'https://facebook.com';
+  const instagramUrl = siteInfo?.Instagram || 'https://instagram.com';
+  const youtubeUrl = siteInfo?.Youtube || 'https://youtube.com';
+
   return (
     <footer id="footer-section" className="relative bg-[#0F7A60] text-white pt-14 pb-10 px-4 sm:px-8 border-t border-[#0D785D] overflow-hidden">
       {/* Top subtle line */}
@@ -40,24 +72,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
           
           {/* Col 1: Brand & Logo Capsule */}
           <div className="lg:col-span-4 space-y-5">
-            {/* White Rounded Brand Capsule Badge */}
             <div className="inline-flex items-center bg-white px-4 py-2.5 rounded-2xl shadow-md border border-white/90">
               <LogoAsihPutera className="h-10 sm:h-12 md:h-13" />
             </div>
 
-            {/* Subtitle Description */}
             <p className="text-xs sm:text-[13px] text-teal-50/90 leading-relaxed max-w-sm font-normal">
-              Mendidik dengan Sepenuh Hati. Bagian dari ekosistem pendidikan Asih Putera: Daycare, TK, MI, MTs, dan MA.
+              {stripHtml(siteInfo?.Description) || 'Mendidik dengan Sepenuh Hati. Bagian dari ekosistem pendidikan Asih Putera: Daycare, TK, MI, MTs, dan MA.'}
             </p>
 
-            {/* Social Icons (Rounded teal circles with brand border) */}
+            {/* Social Icons */}
             <div className="flex items-center gap-3 pt-1">
               <a
                 id="footer-social-facebook"
-                href="https://facebook.com"
+                href={facebookUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Facebook Yayasan Asih Putera"
+                aria-label={`Facebook ${siteName}`}
                 className="w-9 h-9 rounded-full bg-[#0D785D] hover:bg-[#0b5e4a] border border-white/20 flex items-center justify-center text-white/90 hover:text-white transition-all shadow-xs"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -66,10 +96,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
               </a>
               <a
                 id="footer-social-instagram"
-                href="https://instagram.com"
+                href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Instagram Yayasan Asih Putera"
+                aria-label={`Instagram ${siteName}`}
                 className="w-9 h-9 rounded-full bg-[#0D785D] hover:bg-[#0b5e4a] border border-white/20 flex items-center justify-center text-white/90 hover:text-white transition-all shadow-xs"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -78,10 +108,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
               </a>
               <a
                 id="footer-social-youtube"
-                href="https://youtube.com"
+                href={youtubeUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="YouTube Yayasan Asih Putera"
+                aria-label={`YouTube ${siteName}`}
                 className="w-9 h-9 rounded-full bg-[#0D785D] hover:bg-[#0b5e4a] border border-white/20 flex items-center justify-center text-white/90 hover:text-white transition-all shadow-xs"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -98,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
             </h3>
             <ul className="space-y-2.5 text-xs sm:text-[13px] text-teal-50/90 font-normal">
               {[
-                { label: 'Profil MI', target: 'why-us' },
+                { label: 'Profil Yayasan', target: 'why-us' },
                 { label: 'Kurikulum', target: 'units' },
                 { label: 'Program', target: 'units' },
                 { label: 'Kesiswaan', target: 'units' },
@@ -149,21 +179,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
               INFORMASI KONTAK
             </h3>
 
-            {/* Contact Details with Yellow Icons */}
+            {/* Dynamic Contact Details */}
             <div className="space-y-3 text-xs sm:text-[13px] text-teal-50/90">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#facc15] shrink-0 mt-0.5" />
-                <span className="leading-snug">
-                  Jl. P. Cibabat No. 33, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40513
-                </span>
+                <a
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="leading-snug hover:text-white hover:underline transition-all"
+                >
+                  {cleanAddress}
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#facc15] shrink-0" />
-                <span>(022) 1234 5678</span>
+                <span>{phone}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#facc15] shrink-0" />
-                <span>info@asihputera.sch.id</span>
+                <span>{mail}</span>
               </div>
             </div>
 
@@ -173,10 +208,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
                 Newsletter
               </h4>
               <p className="text-[11px] sm:text-xs text-teal-100/90 leading-relaxed">
-                Dapatkan informasi terbaru seputar kegiatan dan program MI Asih Putera.
+                Dapatkan informasi terbaru seputar kegiatan dan program Yayasan Asih Putera.
               </p>
 
-              {/* Joined Input with Yellow Arrow Button */}
               <form onSubmit={handleSubscribe} className="flex items-center pt-1">
                 <div className="relative flex items-center w-full bg-white rounded-xl overflow-hidden shadow-md">
                   <input
@@ -210,17 +244,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectUnit }) => {
 
         {/* Bottom Sub-Footer Bar */}
         <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-teal-100/80 font-medium">
-          <p>© 2026 Yayasan Asih Putera. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {siteName}. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <button 
-              onClick={() => alert('Kebijakan Privasi Yayasan Asih Putera:\nData pribadi Anda dijaga kerahasiaannya dan hanya digunakan untuk keperluan layanan pendidikan dan komunikasi resmi.')} 
+              onClick={() => alert(`Kebijakan Privasi ${siteName}:\nData pribadi Anda dijaga kerahasiaannya dan hanya digunakan untuk keperluan layanan pendidikan dan komunikasi resmi.`)} 
               className="hover:text-white transition-colors cursor-pointer"
             >
               Kebijakan Privasi
             </button>
             <span className="text-white/30">|</span>
             <button 
-              onClick={() => alert('Syarat & Ketentuan Layanan Yayasan Asih Putera:\nLayanan portal dan pendaftaran peserta didik baru tunduk pada ketentuan resmi madrasah.')} 
+              onClick={() => alert(`Syarat & Ketentuan Layanan ${siteName}:\nLayanan portal dan pendaftaran peserta didik baru tunduk pada ketentuan resmi madrasah.`)} 
               className="hover:text-white transition-colors cursor-pointer"
             >
               Syarat & Ketentuan
