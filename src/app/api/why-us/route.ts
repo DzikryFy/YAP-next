@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const kanalType = searchParams.get('KanalType') ?? 'K001';
+  const kanalType = searchParams.get('KanalType') ?? 'K005';
 
   const cookieStore = await cookies();
   const token = cookieStore.get('token')?.value;
@@ -18,9 +18,9 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response.data);
   } catch (error: any) {
-    console.error('Failed to fetch news:', error?.response?.data ?? error.message);
+    console.error('Failed to fetch why-us:', error?.response?.data ?? error.message);
     return NextResponse.json(
-      { Status: 500, Message: 'Failed to fetch news', Data: { Content: [] } },
+      { Status: 500, Message: 'Failed to fetch why-us', Data: { Content: [] } },
       { status: 200 }
     );
   }

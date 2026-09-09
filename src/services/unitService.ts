@@ -1,34 +1,31 @@
-import axios from 'axios';
-
-export interface ContentApiItem {
-  ContentId?: string | number;
-  Id?: string | number;
+export interface UnitApiItem {
+  ContentId?: number;
   Title?: string;
-  Judul?: string;
   Content?: string;
-  Description?: string;
-  Deskripsi?: string;
-  Summary?: string;
   Category?: string;
-  SignedThumbnail?: string;
   Thumbnail?: string;
-  ImageUrl?: string;
-  Gambar?: string;
-  [key: string]: any;
+  ThumbnailId?: number;
 }
 
-export const fetchEducationalUnits = async (): Promise<ContentApiItem[]> => {
+export const buildUnitImageUrl = (item: UnitApiItem): string => {
+  const { ThumbnailId, ContentId, Thumbnail } = item;
+  if (ThumbnailId && ContentId && Thumbnail) {
+    return `/api/attachment?Id=${ThumbnailId}&RefId=${ContentId}&Filename=${encodeURIComponent(Thumbnail)}&t=${Date.now()}`;
+  }
+  return '';
+};
+
+export const fetchEducationalUnits = async (): Promise<UnitApiItem[]> => {
   try {
-    // Paksa request menembak ke server Next.js lokal
-    const response = await axios.get('/api/unit', { baseURL: '' });
-    return (
-      response.data?.Data?.Content ||
-      response.data?.data?.Content ||
-      response.data?.Data ||
-      (Array.isArray(response.data) ? response.data : [])
-    );
+    const response = await fetch('/api/unit', { cache: 'no-store' });
+    if (!response.ok) return [];
+    const result = await response.json();
+    if (result.Status === 200 && Array.isArray(result.Data?.Content)) {
+      return result.Data.Content as UnitApiItem[];
+    }
+    return [];
   } catch (error) {
-    console.error('❌ Gagal memuat data unit dari API:', error);
+    console.error('Gagal memuat unit dari API:', error);
     return [];
   }
 };

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { TopBar } from '../components/TopBar';
 import { Header } from '../components/Header';
@@ -28,20 +27,26 @@ export default function Home() {
   const [selectedFeature, setSelectedFeature] = useState<FeatureItem | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  // Prevent duplicate login requests in React 18 Strict Mode
+  const loginAttempted = useRef(false);
+
   useEffect(() => {
+    if (loginAttempted.current) return;
+    loginAttempted.current = true;
+
     const handleAutoLogin = async () => {
       try {
-        // Tembak Route Handler Next.js
-        const response = await axios.post('/api/login');
+        const response = await fetch('/api/login', { method: 'POST' });
+        const data = await response.json();
 
-        // Cek status success dari response
-        if (response.data?.success) {
-          setIsLoggedIn(true); // Memicu render komponen NewsEvents
+        if (data?.success || data?.Status === 200) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(true);
         }
       } catch (err) {
-        console.error('❌ Auto Login Gagal:', err);
-        // Tetap set true jika ingin mengizinkan halaman dimuat meski login gagal
-        setIsLoggedIn(true); 
+        console.warn('Auto-login failed, enabling UI fallback:', err);
+        setIsLoggedIn(true);
       }
     };
 
@@ -49,17 +54,22 @@ export default function Home() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    let element: HTMLElement | null = null;
-    if (sectionId === 'hero') element = document.getElementById('hero-section');
-    else if (sectionId === 'why-us') element = document.getElementById('why-us-section');
-    else if (sectionId === 'core-values') element = document.getElementById('core-values-section');
-    else if (sectionId === 'units') element = document.getElementById('units-section');
-    else if (sectionId === 'testimonials') element = document.getElementById('testimonials-section');
-    else if (sectionId === 'news') element = document.getElementById('news-section');
-    else if (sectionId === 'footer') element = document.getElementById('footer-section');
+    const sectionMap: Record<string, string> = {
+      'hero': 'hero-section',
+      'why-us': 'why-us-section',
+      'core-values': 'core-values-section',
+      'units': 'units-section',
+      'testimonials': 'testimonials-section',
+      'news': 'news-section',
+      'footer': 'footer-section',
+    };
 
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const targetId = sectionMap[sectionId];
+    if (targetId) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -78,7 +88,7 @@ export default function Home() {
   };
 
   return (
-    <div id="yayasan-asih-putera-app" className="min-h-screen flex flex-col bg-[#f7faf9] selection:bg-[#0F7A60] selection:text-white">
+    <div id="yayasan-asih-putera-app" className="min-h-screen flex flex-col bg-[#f7faf9] selection:bg-[#0C4229] selection:text-white">
       <TopBar 
         onOpenSearch={() => setSearchOpen(true)}
         onSelectNav={(item) => {
@@ -99,11 +109,12 @@ export default function Home() {
         <Hero
           onOpenPPDB={() => handleOpenPPDB()}
           onExplorePrograms={() => scrollToSection('units')}
+          isLoggedIn={isLoggedIn}
         />
 
         <SectionDivider />
 
-        <WhyUs onCardClick={(feature) => setSelectedFeature(feature)} />
+        <WhyUs onCardClick={(feature) => setSelectedFeature(feature)} isLoggedIn={isLoggedIn} />
 
         <SectionDivider />
 
@@ -111,21 +122,15 @@ export default function Home() {
 
         <SectionDivider />
 
-        <EducationalUnits onSelectUnit={(unit) => setSelectedUnit(unit)} />
+        <EducationalUnits onSelectUnit={(unit) => setSelectedUnit(unit)} isLoggedIn={isLoggedIn} />
 
         <SectionDivider />
 
-        <Testimonials />
+        <Testimonials isLoggedIn={isLoggedIn} />
 
         <SectionDivider />
 
-        {isLoggedIn ? (
-          <NewsEvents onSelectNews={(news) => setSelectedNews(news)} />
-        ) : (
-          <div className="py-12 text-center text-slate-400 font-medium">
-            Memuat layanan berita...
-          </div>
-        )}
+        <NewsEvents onSelectNews={(news) => setSelectedNews(news)} isLoggedIn={isLoggedIn} />
 
         <SectionDivider />
 

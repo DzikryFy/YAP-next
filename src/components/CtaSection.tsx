@@ -8,7 +8,7 @@ interface CtaSectionProps {
 
 export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenPPDB, onScheduleVisit }) => {
   return (
-    <section id="cta-enrollment-section" className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="cta-enrollment-section" className="relative py-5 sm:py-7 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
         
         {/* Left Outer Botanical Flower & Leaves Decoration */}
@@ -43,40 +43,39 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenPPDB, onScheduleVi
           </svg>
         </div>
 
-        {/* Right Outer Botanical Orange Leaves Decoration */}
+        {/* Right Outer Botanical Yellow Leaves Decoration */}
         <div className="absolute -right-4 -bottom-3 sm:-right-6 sm:-bottom-4 z-20 pointer-events-none select-none">
           <svg className="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="none">
-            <path d="M70 30 C90 40 85 70 65 85 C55 65 60 40 70 30 Z" fill="#ea580c" opacity="0.9" />
-            <path d="M50 45 C75 50 75 80 50 95 C40 75 40 55 50 45 Z" fill="#f97316" opacity="0.95" />
-            <path d="M30 65 C50 65 55 88 35 98 C25 85 25 75 30 65 Z" fill="#fb923c" />
-            <circle cx="82" cy="70" r="5" fill="#fed7aa" />
-            <circle cx="88" cy="80" r="4" fill="#ffedd5" />
+            <path d="M70 30 C90 40 85 70 65 85 C55 65 60 40 70 30 Z" fill="#eab308" opacity="0.9" />
+            <path d="M50 45 C75 50 75 80 50 95 C40 75 40 55 50 45 Z" fill="#facc15" opacity="0.95" />
+            <path d="M30 65 C50 65 55 88 35 98 C25 85 25 75 30 65 Z" fill="#fde047" />
+            <circle cx="82" cy="70" r="5" fill="#fef08a" />
+            <circle cx="88" cy="80" r="4" fill="#fef9c3" />
           </svg>
         </div>
 
         {/* Main Banner Capsule Card */}
-        <div className="relative rounded-[22px] sm:rounded-[30px] bg-gradient-to-r from-[#0D785D] via-[#0F7A60] via-40% via-[#13856b] to-[#17967a] p-5 sm:p-6 lg:px-9 lg:py-6 shadow-xl shadow-teal-950/20 border border-white/25 overflow-hidden text-white">
+        <div className="relative rounded-[22px] sm:rounded-[30px] bg-gradient-to-r from-[#0C4229] via-[#0E4A2E] via-40% via-[#105434] to-[#135E3B] p-5 sm:p-6 lg:px-9 lg:py-6 shadow-xl shadow-teal-950/20 border border-white/30 overflow-hidden text-white">
           
-          {/* Seamless Campus Building Photo with Smooth Feathered Alpha Mask */}
+          {/* Seamless Campus Building Photo with Smooth Feathered Alpha Mask (Lebih Terang & Jelas) */}
           <div 
             className="absolute inset-0 pointer-events-none select-none overflow-hidden"
             style={{
-              maskImage: 'linear-gradient(to right, transparent 0%, transparent 20%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,1) 75%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 20%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,1) 75%)'
+              maskImage: 'linear-gradient(to right, transparent 0%, transparent 10%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 70%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 10%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 70%)'
             }}
           >
             <img 
               src="/assets/images/cta-profil.jpg" 
               alt="Profil Kampus Asih Putera" 
-              className="w-full h-full object-cover object-right opacity-45 mix-blend-overlay"
+              className="w-full h-full object-cover object-right opacity-80 mix-blend-normal" 
             />
-            {/* Color tint matching brand teal to fuse the photo tones */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0D785D] via-transparent to-[#0F7A60]/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D785D]/60 via-transparent to-white/10" />
+            {/* Lapisan tipis agar teks tetap terbaca jelas */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0C4229]/80 via-[#0E4A2E]/40 to-transparent" />
           </div>
 
           {/* Warm Amber/Gold Light Ray on Top Right */}
-          <div className="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-amber-400/20 blur-3xl pointer-events-none" />
+          <div className="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-yellow-300/25 blur-3xl pointer-events-none" />
 
           {/* Paper Airplane & Sparkles in the Center */}
           <div className="absolute left-[44%] sm:left-[47%] lg:left-[50%] top-2 sm:top-3.5 z-10 pointer-events-none select-none hidden sm:block animate-float">
@@ -110,11 +109,11 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenPPDB, onScheduleVi
             {/* Right Content: Dual Action Pill Buttons */}
             <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-2 sm:gap-2.5 justify-center sm:max-w-md lg:max-w-[240px] ml-auto w-full">
               
-              {/* Button 1: Daftar PPDB Sekarang (Bright Orange Solid Pill) */}
+              {/* Button 1: Daftar PPDB Sekarang (Warna Kuning Solid) */}
               <button
                 id="cta-daftar-ppdb-btn"
                 onClick={onOpenPPDB}
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#ff551f] hover:bg-[#eb4712] active:bg-[#d83c0a] text-white font-bold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-full shadow-md shadow-orange-950/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer whitespace-nowrap"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#eab308] hover:bg-[#ca8a04] active:bg-[#a16207] text-white font-bold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-full shadow-md shadow-yellow-950/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer whitespace-nowrap"
               >
                 <span>Daftar PPDB Sekarang</span>
                 <ArrowRight className="w-4 h-4 text-white stroke-[2.5] ml-0.5 shrink-0" />
@@ -124,10 +123,10 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenPPDB, onScheduleVi
               <button
                 id="cta-kunjungi-sekolah-btn"
                 onClick={onScheduleVisit}
-                className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-teal-50/90 active:bg-teal-100 text-[#0F7A60] font-bold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-full shadow-md shadow-teal-950/10 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer whitespace-nowrap border border-white/80"
+                className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-teal-50/90 active:bg-teal-100 text-[#0C4229] font-bold text-xs sm:text-sm px-5 py-2.5 sm:py-3 rounded-full shadow-md shadow-teal-950/10 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer whitespace-nowrap border border-white/80"
               >
                 <span>Kunjungi Sekolah</span>
-                <ArrowRight className="w-4 h-4 text-[#0F7A60] stroke-[2.5] ml-0.5 shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#0C4229] stroke-[2.5] ml-0.5 shrink-0" />
               </button>
 
             </div>

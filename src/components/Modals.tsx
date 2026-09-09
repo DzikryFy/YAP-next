@@ -98,7 +98,7 @@ export const Modals: React.FC<ModalsProps> = ({
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-black text-[#0F7A60]">Pendaftaran Berhasil Terkirim!</h3>
+                <h3 className="text-2xl font-black text-[#0C4229]">Pendaftaran Berhasil Terkirim!</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Terima kasih, Bapak/Ibu <strong>{parentName}</strong>. Tim Penerimaan Siswa Baru (PPDB) Yayasan Asih Putera akan segera menghubungi Anda melalui WhatsApp di nomor <strong>{parentPhone}</strong>.
                 </p>
@@ -108,7 +108,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       setPpdbSubmitted(false);
                       onClosePPDB();
                     }}
-                    className="bg-[#0F7A60] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#0b5e4a] transition-colors"
+                    className="bg-[#0C4229] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#082F1D] transition-colors"
                   >
                     Selesai
                   </button>
@@ -120,7 +120,7 @@ export const Modals: React.FC<ModalsProps> = ({
                   <span className="text-[10px] font-bold tracking-wider uppercase text-[#ff6f3c] bg-orange-50 px-2.5 py-1 rounded-full">
                     PPDB 2025/2026
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F7A60] mt-2">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0C4229] mt-2">
                     Formulir Minat PPDB
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
@@ -134,7 +134,7 @@ export const Modals: React.FC<ModalsProps> = ({
                     <select
                       value={ppdbLevel}
                       onChange={(e) => setPpdbLevel(e.target.value)}
-                      className="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 focus:bg-white focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 focus:bg-white focus:border-[#0C4229] outline-hidden"
                     >
                       <option value="tk">Day Care / TK Asih Putera (Usia 3 Bln - 6 Thn)</option>
                       <option value="mi">MI Asih Putera (Madrasah Ibtidaiyah / SD)</option>
@@ -151,7 +151,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       value={parentName}
                       onChange={(e) => setParentName(e.target.value)}
                       placeholder="Contoh: Bpk. Ahmad Fauzi"
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
 
@@ -163,7 +163,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       value={childName}
                       onChange={(e) => setChildName(e.target.value)}
                       placeholder="Contoh: Muhammad Rayhan"
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
 
@@ -175,7 +175,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       value={parentPhone}
                       onChange={(e) => setParentPhone(e.target.value)}
                       placeholder="Contoh: 081234567890"
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
                 </div>
@@ -208,10 +208,10 @@ export const Modals: React.FC<ModalsProps> = ({
 
             {visitSubmitted ? (
               <div className="text-center py-8 space-y-4">
-                <div className="w-16 h-16 bg-teal-100 text-[#0F7A60] rounded-full flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 bg-teal-100 text-[#0C4229] rounded-full flex items-center justify-center mx-auto">
                   <School className="w-9 h-9" />
                 </div>
-                <h3 className="text-2xl font-black text-[#0F7A60]">Jadwal Kunjungan Terkonfirmasi</h3>
+                <h3 className="text-2xl font-black text-[#0C4229]">Jadwal Kunjungan Terkonfirmasi</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Kami menantikan kehadiran Bapak/Ibu <strong>{visitorName}</strong> pada tanggal <strong>{visitDate || 'yang telah dipilih'}</strong> di Kampus Yayasan Asih Putera Bandung.
                 </p>
@@ -221,7 +221,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       setVisitSubmitted(false);
                       onCloseVisit();
                     }}
-                    className="bg-[#0F7A60] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#0b5e4a] transition-colors"
+                    className="bg-[#0C4229] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#082F1D] transition-colors"
                   >
                     Tutup
                   </button>
@@ -230,10 +230,10 @@ export const Modals: React.FC<ModalsProps> = ({
             ) : (
               <form onSubmit={handleVisitSubmit} className="space-y-4">
                 <div className="border-b border-slate-100 pb-3">
-                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#0F7A60] bg-teal-50 px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#0C4229] bg-teal-50 px-2.5 py-1 rounded-full">
                     School Tour & Consultation
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F7A60] mt-2">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0C4229] mt-2">
                     Jadwalkan Kunjungan Sekolah
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
@@ -250,7 +250,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       value={visitorName}
                       onChange={(e) => setVisitorName(e.target.value)}
                       placeholder="Nama Anda"
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
 
@@ -262,7 +262,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       value={visitorPhone}
                       onChange={(e) => setVisitorPhone(e.target.value)}
                       placeholder="08xxxxxxxxxx"
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
 
@@ -271,7 +271,7 @@ export const Modals: React.FC<ModalsProps> = ({
                     <select
                       value={visitUnit}
                       onChange={(e) => setVisitUnit(e.target.value)}
-                      className="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 focus:bg-white focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50 text-slate-800 focus:bg-white focus:border-[#0C4229] outline-hidden"
                     >
                       <option value="tk">Day Care / TK Asih Putera</option>
                       <option value="mi">MI Asih Putera (Madrasah Ibtidaiyah)</option>
@@ -287,7 +287,7 @@ export const Modals: React.FC<ModalsProps> = ({
                       required
                       value={visitDate}
                       onChange={(e) => setVisitDate(e.target.value)}
-                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0F7A60] outline-hidden"
+                      className="w-full border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:border-[#0C4229] outline-hidden"
                     />
                   </div>
                 </div>
@@ -295,7 +295,7 @@ export const Modals: React.FC<ModalsProps> = ({
                 <div className="pt-3">
                   <button
                     type="submit"
-                    className="w-full bg-[#0F7A60] hover:bg-[#0b5e4a] text-white font-bold py-3 rounded-full shadow-md text-sm transition-all"
+                    className="w-full bg-[#0C4229] hover:bg-[#082F1D] text-white font-bold py-3 rounded-full shadow-md text-sm transition-all"
                   >
                     Konfirmasi Jadwal Kunjungan
                   </button>
@@ -337,24 +337,24 @@ export const Modals: React.FC<ModalsProps> = ({
               </div>
 
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F7A60] mb-1">Visi Pembelajaran</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0C4229] mb-1">Visi Pembelajaran</h4>
                 <p className="text-sm text-slate-700 leading-relaxed font-medium">{selectedUnit.description}</p>
               </div>
 
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F7A60] mb-1">Kurikulum & Pendekatan</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0C4229] mb-1">Kurikulum & Pendekatan</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">{selectedUnit.curriculum}</p>
               </div>
 
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F7A60] mb-2">Program Unggulan</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0C4229] mb-2">Program Unggulan</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  {selectedUnit.highlights.map((highlight, idx) => (
-                    <div key={idx} className="bg-teal-50/80 border border-teal-100 p-2.5 rounded-xl text-center">
-                      <span className="text-xs font-bold text-[#0F7A60]">{highlight}</span>
-                    </div>
-                  ))}
+                  {selectedUnit?.highlights?.map((highlight, idx) => (
+                <div key={idx} className="bg-teal-50/80 border border-teal-100 p-2.5 rounded-xl text-center">
+                  <span className="text-xs font-bold text-[#0C4229]">{highlight}</span>
                 </div>
+              ))}
+              </div>
               </div>
 
               <div className="pt-3 flex gap-3">
@@ -420,7 +420,7 @@ export const Modals: React.FC<ModalsProps> = ({
               <div className="pt-2">
                 <button
                   onClick={onCloseNews}
-                  className="w-full bg-[#0F7A60] text-white font-bold py-2.5 rounded-full text-xs hover:bg-[#0b5e4a] transition-colors"
+                  className="w-full bg-[#0C4229] text-white font-bold py-2.5 rounded-full text-xs hover:bg-[#082F1D] transition-colors"
                 >
                   Tutup Artikel
                 </button>
@@ -435,7 +435,7 @@ export const Modals: React.FC<ModalsProps> = ({
         <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-20 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-teal-100 relative animate-in slide-in-from-top-4 duration-200">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-extrabold text-[#0F7A60] text-base">Pencarian Website Asih Putera</h3>
+              <h3 className="font-extrabold text-[#0C4229] text-base">Pencarian Website Asih Putera</h3>
               <button onClick={onCloseSearch} className="text-slate-400 hover:text-slate-700">
                 <X className="w-5 h-5" />
               </button>
@@ -448,7 +448,7 @@ export const Modals: React.FC<ModalsProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Ketik kata kunci: PPDB, TK, MI, MTs, MA, Biaya..."
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:border-[#0F7A60] focus:bg-white"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-10 pr-4 text-xs sm:text-sm text-slate-800 focus:outline-hidden focus:border-[#0C4229] focus:bg-white"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
             </div>
@@ -482,12 +482,12 @@ export const Modals: React.FC<ModalsProps> = ({
                     className="w-full text-left p-2.5 rounded-xl hover:bg-teal-50 flex items-center justify-between group transition-colors"
                   >
                     <div>
-                      <div className="font-semibold text-slate-800 group-hover:text-[#0F7A60]">
+                      <div className="font-semibold text-slate-800 group-hover:text-[#0C4229]">
                         {item.title}
                       </div>
                       <div className="text-[10px] text-slate-400">{item.category}</div>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0F7A60] transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0C4229] transition-transform group-hover:translate-x-0.5" />
                   </button>
                 ))}
             </div>
@@ -528,7 +528,7 @@ export const Modals: React.FC<ModalsProps> = ({
               </div>
 
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F7A60] mb-1">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0C4229] mb-1">
                   Pilar Pendidikan Asih Putera
                 </h4>
                 <p className="text-sm text-slate-700 leading-relaxed font-medium">
@@ -537,7 +537,7 @@ export const Modals: React.FC<ModalsProps> = ({
               </div>
 
               <div className="bg-teal-50/70 border border-teal-100/80 p-4 rounded-2xl">
-                <div className="text-xs text-[#0F7A60] font-bold mb-1">Implementasi Terpadu:</div>
+                <div className="text-xs text-[#0C4229] font-bold mb-1">Implementasi Terpadu:</div>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Pilar <strong>{selectedFeature.title}</strong> diintegrasikan dalam seluruh aktivitas harian santri, kurikulum intrakurikuler, ekstrakurikuler, pembiasaan ibadah, dan bimbingan kepemimpinan di seluruh jenjang pendidikan Yayasan Asih Putera.
                 </p>
@@ -546,7 +546,7 @@ export const Modals: React.FC<ModalsProps> = ({
               <div className="pt-2">
                 <button
                   onClick={onCloseFeature}
-                  className="w-full bg-[#0F7A60] hover:bg-[#0b5e4a] text-white font-bold py-3 rounded-full text-xs sm:text-sm shadow-md transition-colors"
+                  className="w-full bg-[#0C4229] hover:bg-[#082F1D] text-white font-bold py-3 rounded-full text-xs sm:text-sm shadow-md transition-colors"
                 >
                   Tutup Informasi
                 </button>

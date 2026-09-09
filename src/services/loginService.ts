@@ -1,4 +1,4 @@
-import apiClient from '../lib/axios';
+import { apiClient } from '../lib/axios';
 
 export interface LoginPayload {
   Username: string;
@@ -6,10 +6,28 @@ export interface LoginPayload {
   SiteId: string | number;
 }
 
+// Memory storage untuk token (tanpa localStorage)
+let inMemoryToken: string | null = null;
+
 export const loginService = {
+  // Method untuk mengambil token aktif
+  getToken: (): string | null => {
+    if (inMemoryToken) return inMemoryToken;
+
+    // Fallback dari session cookie jika halaman di-refresh
+    if (typeof document !== 'undefined') {
+      const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+      if (match) {
+        inMemoryToken = decodeURIComponent(match[1]);
+        return inMemoryToken;
+      }
+    }
+    return null;
+  },
+
   login: async (payload: LoginPayload) => {
     try {
-      // Konversi SiteId ke number agar sesuai tipe data backend Go Fiber
+      // Konversi SiteId ke number untuk Go Fiber
       const formattedPayload = {
         ...payload,
         SiteId: Number(payload.SiteId),
@@ -17,24 +35,31 @@ export const loginService = {
 
       const response = await apiClient.post('/Auth/Login', formattedPayload);
 
-      // Ambil token dari response Go Fiber
+      // Extract token dari response backend
       const token =
         response.data?.Data?.Token ||
         response.data?.Data?.token ||
         response.data?.token;
 
       if (token && typeof window !== 'undefined') {
-        // 1. Simpan di localStorage
-        localStorage.setItem('token', token);
+        // 1. Simpan di variabel memori JS
+        inMemoryToken = token;
 
-        // 2. Simpan di Session Cookie (Tanpa 'expires' = otomatis terhapus saat browser ditutup)
-        document.cookie = `token=${token}; path=/;`;
+        // 2. Simpan di Session Cookie (Otomatis hapus saat browser ditutup)
+        document.cookie = `token=${token}; path=/; SameSite=Lax`;
       }
 
       return response.data;
     } catch (error: any) {
       console.error('❌ Login Error:', error?.response?.data || error.message);
       throw error;
+    }
+  },
+
+  logout: () => {
+    inMemoryToken = null;
+    if (typeof document !== 'undefined') {
+      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
     }
   },
 };

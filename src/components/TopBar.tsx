@@ -8,7 +8,7 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ onOpenSearch, onSelectNav }) => {
   return (
-    <div id="top-header-bar" className="bg-[#0F7A60] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#0D785D]">
+    <div id="top-header-bar" className="bg-[#0C4229] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#0C4229]">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Left: Contact Info */}
         <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
@@ -18,7 +18,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSearch, onSelectNav }) => 
             className="inline-flex items-center gap-1.5 hover:text-emerald-200 transition-colors font-medium"
           >
             <Phone className="w-3.5 h-3.5 fill-current" />
-            <span>Hotline 0811 2233 4455</span>
+            <span>Hotline 081320267490</span>
           </a>
           <a
             id="topbar-email-link"
@@ -26,7 +26,7 @@ export const TopBar: React.FC<TopBarProps> = ({ onOpenSearch, onSelectNav }) => 
             className="inline-flex items-center gap-1.5 hover:text-emerald-200 transition-colors font-medium"
           >
             <Mail className="w-3.5 h-3.5" />
-            <span>info@asihputera.sch.id</span>
+            <span>humas@asihputera.sch.id</span>
           </a>
         </div>
 

@@ -18,7 +18,7 @@ export const LogoAsihPutera: React.FC<LogoProps> = ({
         : ''
     }`}>
       <img
-        src="/assets/images/logo-yap-official.png"
+        src="/assets/images/logo-yap-1.png"
         alt={alt}
         className={`${className} w-auto max-w-full object-contain transition-all`}
         loading="eager"

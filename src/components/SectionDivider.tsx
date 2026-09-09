@@ -7,7 +7,7 @@ interface SectionDividerProps {
 export const SectionDivider: React.FC<SectionDividerProps> = ({ className = '' }) => {
   return (
     <div 
-      className={`w-full py-4 sm:py-6 overflow-hidden flex items-center justify-center relative select-none pointer-events-none ${className}`}
+      className={`w-full py-1.5 sm:py-2 overflow-hidden flex items-center justify-center relative select-none pointer-events-none ${className}`}
       aria-hidden="true"
     >
       {/* Background Repeating Islamic Geometric Watermark Pattern */}
@@ -41,7 +41,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({ className = '' }
               strokeWidth="0.75" 
               opacity="0.35" 
             />
-            <line x1="0" y1="20" x2="80" y2="20" stroke="#0F7A60" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.2" />
+            <line x1="0" y1="20" x2="80" y2="20" stroke="#0C4229" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.2" />
           </pattern>
           <rect x="0" y="0" width="100%" height="100%" fill="url(#islamic-band-pattern)" />
         </svg>
@@ -52,7 +52,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({ className = '' }
         
         {/* Left Fading Gradient Line */}
         <div className="flex-1 flex items-center justify-end">
-          <div className="w-full max-w-md h-[1.5px] bg-gradient-to-r from-transparent via-[#0F7A60]/50 to-[#c59b4c]" />
+          <div className="w-full max-w-md h-[1.5px] bg-gradient-to-r from-transparent via-[#0C4229]/50 to-[#c59b4c]" />
           {/* Small Hollow Diamond on the Left */}
           <div className="w-2.5 h-2.5 border border-[#c59b4c] rotate-45 ml-2 mr-2.5 bg-[#f7faf9] shrink-0" />
           {/* Small Gold Dot Left */}
@@ -65,10 +65,10 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({ className = '' }
           <div className="absolute inset-1 border-[1.5px] border-[#c59b4c] rotate-45 rounded-[2px]" />
           
           {/* Inner Teal Square */}
-          <div className="absolute inset-1.5 border-[1.5px] border-[#0F7A60] rotate-0 rounded-[1px] bg-white/60 backdrop-blur-xs" />
+          <div className="absolute inset-1.5 border-[1.5px] border-[#0C4229] rotate-0 rounded-[1px] bg-white/60 backdrop-blur-xs" />
           
           {/* Center Green/Teal Dot */}
-          <div className="w-2 h-2 rounded-full bg-[#0F7A60] border border-white shadow-xs z-10" />
+          <div className="w-2 h-2 rounded-full bg-[#0C4229] border border-white shadow-xs z-10" />
         </div>
 
         {/* Right Fading Gradient Line */}
@@ -77,7 +77,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({ className = '' }
           <div className="w-1.5 h-1.5 rounded-full bg-[#c59b4c] shrink-0 ml-3" />
           {/* Small Hollow Diamond on the Right */}
           <div className="w-2.5 h-2.5 border border-[#c59b4c] rotate-45 ml-2.5 mr-2 bg-[#f7faf9] shrink-0" />
-          <div className="w-full max-w-md h-[1.5px] bg-gradient-to-r from-[#c59b4c] via-[#0F7A60]/50 to-transparent" />
+          <div className="w-full max-w-md h-[1.5px] bg-gradient-to-r from-[#c59b4c] via-[#0C4229]/50 to-transparent" />
         </div>
 
       </div>
