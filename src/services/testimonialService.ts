@@ -22,6 +22,7 @@ const stripHtml = (html?: string): string => {
 
 const buildAvatarUrl = (item: TestimonialApiItem): string => {
   const { ThumbnailId, ContentId, Thumbnail } = item;
+  if (Thumbnail && /^https?:\/\//i.test(Thumbnail)) return Thumbnail;
   if (ThumbnailId && ContentId && Thumbnail) {
     return `/api/attachment?Id=${ThumbnailId}&RefId=${ContentId}&Filename=${encodeURIComponent(Thumbnail)}&t=${Date.now()}`;
   }

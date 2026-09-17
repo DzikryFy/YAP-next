@@ -39,14 +39,10 @@ export default function Home() {
         const response = await fetch('/api/login', { method: 'POST' });
         const data = await response.json();
 
-        if (data?.success || data?.Status === 200) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(true);
-        }
+        setIsLoggedIn(Boolean(data?.success || data?.Status === 200));
       } catch (err) {
-        console.warn('Auto-login failed, enabling UI fallback:', err);
-        setIsLoggedIn(true);
+        console.warn('Auto-login failed; CMS requests will remain disabled:', err);
+        setIsLoggedIn(false);
       }
     };
 
@@ -88,7 +84,7 @@ export default function Home() {
   };
 
   return (
-    <div id="yayasan-asih-putera-app" className="min-h-screen flex flex-col bg-[#f7faf9] selection:bg-[#0C4229] selection:text-white">
+    <div id="yayasan-asih-putera-app" className="min-h-screen flex flex-col bg-[#f4f8f5] selection:bg-[#075B3A] selection:text-white">
       <TopBar 
         onOpenSearch={() => setSearchOpen(true)}
         onSelectNav={(item) => {

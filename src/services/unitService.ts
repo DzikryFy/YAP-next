@@ -9,6 +9,7 @@ export interface UnitApiItem {
 
 export const buildUnitImageUrl = (item: UnitApiItem): string => {
   const { ThumbnailId, ContentId, Thumbnail } = item;
+  if (Thumbnail && /^https?:\/\//i.test(Thumbnail)) return Thumbnail;
   if (ThumbnailId && ContentId && Thumbnail) {
     return `/api/attachment?Id=${ThumbnailId}&RefId=${ContentId}&Filename=${encodeURIComponent(Thumbnail)}&t=${Date.now()}`;
   }

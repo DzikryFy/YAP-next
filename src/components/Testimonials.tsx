@@ -46,7 +46,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ isLoggedIn = false }
   };
 
   return (
-    <section id="testimonials-section" className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white/40">
+    <section id="testimonials-section" className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ backgroundColor: '#fff0f6', backgroundImage: 'radial-gradient(circle at 7% 80%, rgba(45, 212, 191, 0.18), transparent 28%), radial-gradient(circle at 94% 15%, rgba(244, 114, 182, 0.2), transparent 30%), linear-gradient(135deg, #fff0f6 0%, #f5f0ff 100%)' }}>
 
       {/* Decorative blobs */}
       <div className="absolute -left-12 top-1/2 -translate-y-1/2 w-48 h-64 pointer-events-none select-none hidden lg:block opacity-60">

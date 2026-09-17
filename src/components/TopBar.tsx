@@ -8,7 +8,7 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ onOpenSearch, onSelectNav }) => {
   return (
-    <div id="top-header-bar" className="bg-[#0C4229] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#0C4229]">
+    <div id="top-header-bar" className="bg-[#075B3A] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#075B3A]">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Left: Contact Info */}
         <div className="flex items-center gap-4 sm:gap-6 flex-wrap">

@@ -38,7 +38,7 @@ export const NewsEvents: React.FC<NewsEventsProps> = ({ onSelectNews, isLoggedIn
   }, [isLoggedIn]);
 
   return (
-    <section id="news-section" className="py-8 sm:py-10 px-4 sm:px-8 relative">
+    <section id="news-section" className="py-8 sm:py-10 px-4 sm:px-8 relative overflow-hidden" style={{ backgroundColor: '#fff8e9', backgroundImage: 'radial-gradient(circle at 8% 18%, rgba(251, 146, 60, 0.2), transparent 28%), radial-gradient(circle at 94% 82%, rgba(96, 165, 250, 0.18), transparent 30%), linear-gradient(135deg, #fff8e9 0%, #fff1e7 100%)' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Section Heading */}
@@ -95,12 +95,14 @@ export const NewsEvents: React.FC<NewsEventsProps> = ({ onSelectNews, isLoggedIn
                   className="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between cursor-pointer group"
                 >
                   <div className="h-48 overflow-hidden bg-slate-100 relative">
-                    <img
-                      src={image}
-                      alt={title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-                      className="group-hover:scale-105 transition-transform duration-500"
-                    />
+                    {image ? (
+                      <img
+                        src={image}
+                        alt={title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                        className="group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : null}
                   </div>
 
                   <div className="p-5 flex-1 flex flex-col justify-between">

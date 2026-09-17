@@ -13,6 +13,7 @@ interface WhyUsProps {
 // Bangun URL proxy gambar dari field attachment
 const buildImageUrl = (item: WhyUsContentItem): string => {
   const { ThumbnailId, ContentId, Thumbnail } = item;
+  if (Thumbnail && /^https?:\/\//i.test(Thumbnail)) return Thumbnail;
   if (ThumbnailId && ContentId && Thumbnail) {
     return `/api/attachment?Id=${ThumbnailId}&RefId=${ContentId}&Filename=${encodeURIComponent(Thumbnail)}&t=${Date.now()}`;
   }
@@ -32,8 +33,8 @@ const CARD_PRESETS: {
   footerTag: string;
   number: string;
 }[] = [
-  { iconName: 'sprout',      accentColor: '#10B981', footerTag: 'Pendidikan Holistik', number: '01' },
-  { iconName: 'moon',        accentColor: '#F59E0B', footerTag: 'Karakter Rabbani',    number: '02' },
+  { iconName: 'sprout',      accentColor: '#075B3A', footerTag: 'Pendidikan Holistik', number: '01' },
+  { iconName: 'moon',        accentColor: '#D99A1E', footerTag: 'Karakter Rabbani',    number: '02' },
   { iconName: 'users',       accentColor: '#38BDF8', footerTag: 'Ekosistem Terpadu',   number: '03' },
   { iconName: 'bookOpen',    accentColor: '#C084FC', footerTag: 'Kurikulum Terpadu',   number: '04' },
   { iconName: 'heart',       accentColor: '#F472B6', footerTag: 'Akhlak Mulia',        number: '05' },
@@ -92,7 +93,7 @@ export const WhyUs: React.FC<WhyUsProps> = ({ onCardClick, isLoggedIn = false })
   };
 
   return (
-    <section id="why-us-section" className="py-6 sm:py-8 px-4 sm:px-8 relative">
+    <section id="why-us-section" className="py-6 sm:py-8 px-4 sm:px-8 relative overflow-hidden" style={{ backgroundColor: '#eaf4ef', backgroundImage: 'radial-gradient(circle at 8% 18%, rgba(250, 204, 21, 0.18), transparent 25%), radial-gradient(circle at 92% 80%, rgba(7, 91, 58, 0.12), transparent 30%), linear-gradient(135deg, #eaf4ef 0%, #f5f8ee 100%)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Section Heading with Golden Islamic Ornaments */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5 text-center">

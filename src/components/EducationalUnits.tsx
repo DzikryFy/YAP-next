@@ -17,8 +17,8 @@ const stripHtml = (html?: string): string => {
 
 // Icon & warna per urutan unit
 const UNIT_PRESETS: { iconType: UnitItem['iconType']; iconBg: string; buttonBorder: string }[] = [
-  { iconType: 'baby',       iconBg: '#F59E0B', buttonBorder: 'border-[#F59E0B]' },
-  { iconType: 'book',       iconBg: '#10B981', buttonBorder: 'border-[#10B981]' },
+  { iconType: 'baby',       iconBg: '#D99A1E', buttonBorder: 'border-[#D99A1E]' },
+  { iconType: 'book',       iconBg: '#075B3A', buttonBorder: 'border-[#075B3A]' },
   { iconType: 'building',   iconBg: '#3B82F6', buttonBorder: 'border-[#3B82F6]' },
   { iconType: 'graduation', iconBg: '#8B5CF6', buttonBorder: 'border-[#8B5CF6]' },
 ];
@@ -68,7 +68,7 @@ export const EducationalUnits: React.FC<EducationalUnitsProps> = ({ onSelectUnit
   };
 
   return (
-    <section id="units-section" className="py-8 sm:py-10 px-4 sm:px-8 relative">
+    <section id="units-section" className="py-8 sm:py-10 px-4 sm:px-8 relative overflow-hidden" style={{ backgroundColor: '#f0f7f3', backgroundImage: 'radial-gradient(circle at 6% 18%, rgba(7, 91, 58, 0.12), transparent 26%), radial-gradient(circle at 94% 82%, rgba(250, 204, 21, 0.14), transparent 30%), linear-gradient(135deg, #f0f7f3 0%, #f8f7ee 100%)' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Section Heading */}

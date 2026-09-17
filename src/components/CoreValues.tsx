@@ -33,7 +33,7 @@ const VALUE_ITEMS: ValueCardData[] = [
     id: 'bener',
     name: 'Bener',
     iconType: 'scale',
-    badgeBg: 'bg-[#f59e0b]',
+    badgeBg: 'bg-[#d99a1e]',
     description: 'Jujur, amanah, dan bertanggung jawab.',
   },
   {
@@ -93,7 +93,7 @@ export const CoreValues: React.FC<CoreValuesProps> = ({ onSelectValue }) => {
   };
 
   return (
-    <section id="core-values-section" className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="core-values-section" className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 relative overflow-hidden" style={{ backgroundColor: '#fff7e8', backgroundImage: 'radial-gradient(circle at 10% 86%, rgba(251, 146, 60, 0.2), transparent 25%), radial-gradient(circle at 92% 12%, rgba(244, 114, 182, 0.16), transparent 28%), linear-gradient(120deg, #fff7e8 0%, #fffdf0 100%)' }}>
       
       {/* SURROUNDING PLAYFUL ILLUSTRATIONS (LEFT & RIGHT) */}
       <div className="max-w-7xl mx-auto relative">
@@ -119,7 +119,7 @@ export const CoreValues: React.FC<CoreValuesProps> = ({ onSelectValue }) => {
           
           <div className="absolute bottom-6 left-12 grid grid-cols-4 gap-1.5 opacity-60">
             {[...Array(12)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]" />
+              <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#d99a1e]" />
             ))}
           </div>
 
@@ -130,7 +130,7 @@ export const CoreValues: React.FC<CoreValuesProps> = ({ onSelectValue }) => {
 
         {/* Bottom-Right Green Leaves & Waves (Ditempatkan di z-0 & digeser agar tidak menutupi teks Singer) */}
         <div className="absolute -right-6 -bottom-8 w-40 sm:w-52 h-32 sm:h-40 pointer-events-none select-none z-0 hidden md:block">
-          <div className="absolute bottom-0 right-0 w-28 h-16 bg-[#fcd34d]/80 rounded-tl-[40px] -z-10" />
+          <div className="absolute bottom-0 right-0 w-28 h-16 bg-[#e5ad38]/80 rounded-tl-[40px] -z-10" />
           <div className="absolute bottom-0 right-6 w-24 h-20 bg-[#fb923c]/70 rounded-tl-[50px] -z-20" />
           
           <svg className="absolute bottom-6 right-8 w-10 h-14 text-[#16a34a] fill-current drop-shadow-sm" viewBox="0 0 50 70">
@@ -146,7 +146,7 @@ export const CoreValues: React.FC<CoreValuesProps> = ({ onSelectValue }) => {
         </div>
 
         {/* MAIN CAPSULE CONTAINER (Warna Solid #0C4229 & z-20 agar teks selalu di atas ilustrasi) */}
-        <div className="relative z-20 rounded-3xl sm:rounded-4xl bg-[#0C4229] text-white shadow-xl shadow-teal-950/15 overflow-hidden border border-white/20">
+        <div className="relative z-20 rounded-3xl sm:rounded-4xl bg-[#075B3A] text-white shadow-xl shadow-teal-950/15 overflow-hidden border border-white/20">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             
@@ -193,7 +193,7 @@ export const CoreValues: React.FC<CoreValuesProps> = ({ onSelectValue }) => {
                     } ${isHovered ? 'bg-white/15 rounded-xl scale-105' : 'hover:bg-white/10 rounded-xl'}`}
                   >
                     {/* Double-Ring Circular Icon Badge */}
-                    <div className={`w-15 h-15 sm:w-16 sm:h-16 rounded-full ${item.badgeBg} flex items-center justify-center mb-2.5 shadow-md ring-3 ring-white ring-offset-2 ring-offset-[#0C4229] transform transition-transform duration-200 ${isHovered ? 'scale-110' : ''}`}>
+                    <div className={`w-15 h-15 sm:w-16 sm:h-16 rounded-full ${item.badgeBg} flex items-center justify-center mb-2.5 shadow-md ring-3 ring-white ring-offset-2 ring-offset-[#075B3A] transform transition-transform duration-200 ${isHovered ? 'scale-110' : ''}`}>
                       {renderIcon(item.iconType)}
                     </div>
 
